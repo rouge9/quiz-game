@@ -14,14 +14,15 @@ def random_color():
     return color_tuple
 
 direction = [0,90,180,270]
-tim.width(15)
+# tim.width(15)
 tim.speed("fastest")
+def draw_circle(size):
+    for d in range(int(360 / size)):
+        tim.color(random_color())
+        tim.circle(100)
+        tim.setheading(tim.heading() + size)
 
-# for d in range(1000):
-#     tim.color(random_color())
-#     tim.forward(70)
-#     tim.setheading(random.choice(direction))
 
-
+draw_circle(5)
 screen = Screen()
 screen.exitonclick()
