@@ -37,10 +37,8 @@ while is_game_on:
         scoreboard.game_over()
 
     # detect collusion with its self
-    for segments in snake.segment:
-        if segments == snake.head:
-            pass
-        elif snake.head.distance(segments) < 10:
+    for segments in snake.segment[1:]:
+       if snake.head.distance(segments) < 10:
             is_game_on = False
             scoreboard.game_over()
 
