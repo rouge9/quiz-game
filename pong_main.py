@@ -2,6 +2,7 @@ from turtle import Screen
 import time
 from ball import Ball
 from paddle import Paddle
+from scoreboard import Scoreboard
 screen = Screen()
 is_game_on = True
 screen.setup(800, 600)
@@ -11,7 +12,7 @@ screen.tracer(0)
 paddle_right = Paddle((350, 0))
 paddle_left = Paddle((-350, 0))
 ball = Ball()
-
+scoreboard = Scoreboard()
 
 screen.listen()
 
@@ -21,7 +22,7 @@ screen.onkey(paddle_left.move_up, "w")
 screen.onkey(paddle_left.move_down, "s")
 
 while is_game_on:
-    time.sleep(0.1)
+    time.sleep(ball.move_speed)
     screen.update()
     ball.move()
     # detect collusion with the wall
@@ -35,10 +36,12 @@ while is_game_on:
     # detect if right paddle misses
     if ball.xcor() > 380:
         ball.reset_ball()
+        scoreboard.count_l()
 
     # detect if left paddle misses
     if ball.xcor() < -380:
         ball.reset_ball()
+        scoreboard.count_r()
 
 
 
