@@ -8,17 +8,17 @@ screen.setup(800, 600)
 screen.bgcolor("black")
 screen.title("Pong Game")
 screen.tracer(0)
-paddle_1 = Paddle((350, 0))
-paddle_2 = Paddle((-350, 0))
+paddle_right = Paddle((350, 0))
+paddle_left = Paddle((-350, 0))
 ball = Ball()
 
 
 screen.listen()
 
-screen.onkey(paddle_1.move_up, "Up")
-screen.onkey(paddle_1.move_down, "Down")
-screen.onkey(paddle_2.move_up, "w")
-screen.onkey(paddle_2.move_down, "s")
+screen.onkey(paddle_right.move_up, "Up")
+screen.onkey(paddle_right.move_down, "Down")
+screen.onkey(paddle_left.move_up, "w")
+screen.onkey(paddle_left.move_down, "s")
 
 while is_game_on:
     time.sleep(0.1)
@@ -29,6 +29,17 @@ while is_game_on:
         ball.bounce_y()
 
     # detect collusion with the paddle
-    if ball.distance(paddle_1) < 50 or ball.xcor() >320 or ball.distance(paddle_2) < 50 or ball.xcor() < -320:
+    if ball.distance(paddle_right) < 30 or ball.xcor() > 380 or ball.distance(paddle_left) < 30 or ball.xcor() < -380:
         ball.bounce_x()
+
+    # detect if right paddle misses
+    if ball.xcor() > 380:
+        ball.reset_ball()
+
+    # detect if left paddle misses
+    if ball.xcor() < -380:
+        ball.reset_ball()
+
+
+
 screen.exitonclick()
