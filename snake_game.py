@@ -33,14 +33,12 @@ while is_game_on:
 
     # Detect collusion with the wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        is_game_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
 
     # detect collusion with its self
     for segments in snake.segment[1:]:
-       if snake.head.distance(segments) < 10:
-            is_game_on = False
-            scoreboard.game_over()
+        if snake.head.distance(segments) < 10:
+            scoreboard.reset()
 
     snake.move()
 
